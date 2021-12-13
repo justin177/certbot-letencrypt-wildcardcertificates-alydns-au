@@ -36,7 +36,12 @@ $obj = new GodaddyDns($argv[5], $argv[6], $domainarray[1]);
 
 switch ($argv[1]) {
     case "clean":
-        //api 不包含该操作
+        $data = $obj->DeleteDNSRecord($domainarray[1], $selfdomain);
+        if ($data["httpCode"] != 204) {
+            $message = json_decode($data["result"], true);
+            echo "域名处理失败-".$message["message"];
+            exit;
+        }
         break;
 
     case "add":
@@ -133,7 +138,9 @@ class GodaddyDns
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method); //设置请求方式
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data); //设置提交的字符串
+        if ($data != '') {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data); //设置提交的字符串
+        }
         $result   = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
@@ -156,13 +163,10 @@ class GodaddyDns
         return $this->curl($url, $header);
     }
 
-    public function delRecords($domain)
+    public function DeleteDNSRecord($domain, $record, $recordType = 'TXT')
     {
-
-        $url    = "https://api.godaddy.com/v1/domains/$domain";
-        $header = ['accept: application/json', 'Content-Type: application/json',
-            'authorization:sso-key '.$this->accessKeyId.':'.$this->accessSecrec];
-
+        $url    = "https://api.godaddy.com/v1/domains/$domain/records/$recordType/$record";
+        $header = ['accept: application/json', 'authorization:sso-key '.$this->accessKeyId.':'.$this->accessSecrec];
         return $this->curl($url, $header, '', 'delete');
     }
 

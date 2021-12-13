@@ -2,7 +2,7 @@
 
 import json
 import sys
-import os 
+import os
 
 class GodaddyDns:
     def __init__(self, access_key_id, access_key_secret, domain_name):
@@ -29,26 +29,30 @@ class GodaddyDns:
 
     def curl(self, url, data, method):
         if sys.version_info[0] < 3:
-            print ("s")
             import urllib2
             from urllib2 import URLError, HTTPError
+            from contextlib import closing
             httpdata = json.dumps(data).encode('utf-8')
-            req = urllib2.Request(url=url, data=httpdata)
+            if httpdata == '{}':
+                req = urllib2.Request(url=url)
+            else:
+                req = urllib2.Request(url=url, data=httpdata)
             req.get_method = lambda: method
             req.add_header('accept', 'application/json')
             req.add_header('Content-Type', 'application/json')
             key = "sso-key " + self.access_key_id + ':' + self.access_key_secret
             req.add_header('authorization', key)
             try:
-                with urllib2.urlopen(req) as res:
+                with closing(urllib2.urlopen(req)) as res:
                     code = res.getcode()
                     print (res.info())
                     resinfo = res.read().decode('utf-8')
                     result = True
-                    if code != 200:
+                    if code != 200 and code != 204:
                         result = False
                     return (result, resinfo)
             except AttributeError as e:
+                print(e)
                 #python2 处理 PATCH HTTP 方法的一个Bug，不影响结果
                 return (True,'')
             except (HTTPError, URLError) as e:
@@ -57,22 +61,24 @@ class GodaddyDns:
         else :
             import urllib.request
             from urllib.error import URLError, HTTPError
-            
+            from contextlib import closing
             httpdata = json.dumps(data).encode('utf-8')
-
-            req = urllib.request.Request(url=url, data=httpdata, method=method)
+            if httpdata == '{}':
+                req = urllib.request.Request(url=url, method=method)
+            else:
+                req = urllib.request.Request(url=url, data=httpdata, method=method)
             req.add_header('accept', 'application/json')
             req.add_header('Content-Type', 'application/json')
             key = "sso-key " + self.access_key_id + ':' + self.access_key_secret
 
             req.add_header('authorization', key)
             try:
-                with urllib.request.urlopen(req) as res:
+                with closing(urllib.request.urlopen(req)) as res:
                     code = res.getcode()
-                    # print (res.info())
+                    print (res.info())
                     resinfo = res.read().decode('utf-8')
                     result = True
-                    if code != 200:
+                    if code != 200 and code != 204:
                         result = False
                     return (result, resinfo)
             except (HTTPError, URLError) as e:
@@ -90,10 +96,9 @@ class GodaddyDns:
         return self.curl(url, {}, "GET")
 
     def DeleteDNSRecord(self, name, recordType='TXT'):
-        '''
-        Godaddy DNS  没有提供删除DSN记录的API
-        '''
-        return True
+        url = "https://api.godaddy.com/v1/domains/" + \
+              self.domain_name + "/records/" + recordType + "/" + name
+        return self.curl(url, {}, "DELETE")
 
 file_name, cmd, certbot_domain, acme_challenge, certbot_validation, ACCESS_KEY_ID, ACCESS_KEY_SECRET = sys.argv
 
@@ -108,3 +113,6 @@ domain = GodaddyDns(ACCESS_KEY_ID, ACCESS_KEY_SECRET, certbot_domain[1])
 
 if cmd == "add":
     print(domain.CreateDNSRecord(selfdomain, certbot_validation))
+
+if cmd == "clean":
+    print(domain.DeleteDNSRecord(selfdomain))
