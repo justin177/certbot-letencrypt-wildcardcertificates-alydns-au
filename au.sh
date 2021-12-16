@@ -29,6 +29,11 @@ HWY_TOKEN=""
 GODADDY_KEY=""
 GODADDY_TOKEN=""
 
+#Cloudflare的API Token
+#如何申请见https://api.cloudflare.com/#getting-started-requests
+CLOUDFLARE_KEY="null"
+CLOUDFLARE_TOKEN=""
+
 ################ END ##############
 
 PATH=$(cd `dirname $0`; pwd)
@@ -46,7 +51,7 @@ cmd=""
 key=""
 token=""
 
-if [[ "$paction" != "clean" ]]; then
+if [[ -z "$paction" ]]; then
 	paction="add"
 fi
 
