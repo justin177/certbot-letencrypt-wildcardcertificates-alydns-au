@@ -106,6 +106,10 @@ case $plang in
 		dnsapi=$PATH"/python-version/godaddydns.py"
 		key=$GODADDY_KEY
 		token=$GODADDY_TOKEN
+	elif [[ "$pdns" == "cloudflare" ]] ;then
+		dnsapi=$PATH"/python-version/cloudflare.py"
+		key=$CLOUDFLARE_KEY
+		token=$CLOUDFLARE_TOKEN
 	else 
 		echo "Not support this dns services"
 		exit
