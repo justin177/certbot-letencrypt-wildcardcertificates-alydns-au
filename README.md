@@ -40,6 +40,7 @@ $ chmod 0777 au.sh
 - TXY_KEY 和 TXY_TOKEN：腾讯云 [API 密钥官方申请文档](https://console.cloud.tencent.com/cam/capi)。
 - HWY_KEY 和 HWY_TOKEN: 华为云 [API 密钥官方申请文档](https://support.huaweicloud.com/devg-apisign/api-sign-provide.html)
 - GODADDY_KEY 和 GODADDY_TOKEN：GoDaddy [API 密钥官方申请文档](https://developer.godaddy.com/getstarted)。
+- CLOUDFLARE_TOKEN：cloudflare [API 密钥官方申请文档](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)。
 
 （3）选择运行环境
 
@@ -51,9 +52,10 @@ $ chmod 0777 au.sh
     - au.sh php godaddy add/clean：PHP操作GoDaddy DNS，增加/清空DNS。
 - Python(支持2.7和3.7，无需任何第三方库)
     - au.sh python aly add/clean：Python操作阿里云DNS，增加/清空DNS。
-    - au.sh python txy add/clean：Python操作腾讯云DNS，增加/清空DNS。
-  - au.sh python hwy add/clean：Python操作华为云DNS，增加/清空DNS。
-  - au.sh python godaddy add/clean：Python操作GoDaddy DNS，增加/清空DNS。
+    - au.sh python txy add/clean：Python操作腾讯云DNS，增加/清空DNS。(升级了 DNSPod API 3.0 版本)
+    - au.sh python hwy add/clean：Python操作华为云DNS，增加/清空DNS。
+    - au.sh python godaddy add/clean：Python操作GoDaddy DNS，增加/清空DNS。
+    - au.sh python cloudflare add/clean：Python操作cloudflare DNS，增加/清空DNS。
 
 根据自己服务器环境和域名服务商选择任意一个 hook shell（包含相应参数），具体使用见下面。
 
