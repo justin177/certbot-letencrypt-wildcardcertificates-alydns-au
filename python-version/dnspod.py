@@ -94,7 +94,7 @@ class DNSPod:
             import urllib2
             from urllib2 import URLError, HTTPError
             from contextlib import closing
-            req = urllib2.Request(url=url, data=payload.encode("utf-8"))
+            req = urllib2.Request(url=self.endpoint, data=payload.encode("utf-8"))
             req.get_method = lambda: "POST"
             req.add_header('Authorization', authorization)
             req.add_header('Content-Type', self.content_type)
