@@ -91,11 +91,7 @@ case $plang in
 		key=$ALY_KEY
 		token=$ALY_TOKEN
     elif [[ "$pdns" == "txy" ]] ;then
-		dnsapi=$PATH"/python-version/txydns.py"
-		key=$TXY_KEY
-		token=$TXY_TOKEN
-  elif [[ "$pdns" == "txy" ]]; then
-		dnsapi=$PATH"/python-version/txydns.py"
+        dnsapi=$PATH"/python-version/dnspod.py"
 		key=$TXY_KEY
 		token=$TXY_TOKEN
 	elif [[ "$pdns" == "hwy" ]]; then
