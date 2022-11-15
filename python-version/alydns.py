@@ -207,15 +207,15 @@ if __name__ == '__main__':
     # data = domain.describe_domain_records()
     # record_list = data["DomainRecords"]["Record"]
     # for item in record_list:
-    #	if 'test' in item['RR']:
-    #		domain.delete_domain_record(item['RecordId'])
+    #    if 'test' in item['RR']:
+    #        domain.delete_domain_record(item['RecordId'])
 
-	# 第一个参数是 action，代表 (add/clean)
-	# 第二个参数是域名
-	# 第三个参数是主机名（第三个参数+第二个参数组合起来就是要添加的 TXT 记录）
-	# 第四个参数是 TXT 记录值
-	# 第五个参数是 APPKEY
-	# 第六个参数是 APPTOKEN
+    # 第一个参数是 action，代表 (add/clean)
+    # 第二个参数是域名
+    # 第三个参数是主机名（第三个参数+第二个参数组合起来就是要添加的 TXT 记录）
+    # 第四个参数是 TXT 记录值
+    # 第五个参数是 APPKEY
+    # 第六个参数是 APPTOKEN
     #sys.exit(0)
 
     print("域名 API 调用开始")

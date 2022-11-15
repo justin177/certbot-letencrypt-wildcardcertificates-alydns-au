@@ -90,14 +90,14 @@ class GodaddyDns
         //常见根域名 【https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains】
         // 【http://www.seobythesea.com/2006/01/googles-most-popular-and-least-popular-top-level-domains/】
 
-	global $domainfile;
-	$tmp = file($domainfile);
-	$arr = array();
-	foreach ($tmp as $k=>$v) {
-		$v = trim($v);
-		if ($v!="")
-			$arr[]= "." . $v;
-	}
+        global $domainfile;
+        $tmp = file($domainfile);
+        $arr = array();
+        foreach ($tmp as $k=>$v) {
+            $v = trim($v);
+            if ($v!="")
+                $arr[]= "." . $v;
+        }
 
         //二级域名
         $seconddomain = "";
@@ -113,8 +113,8 @@ class GodaddyDns
                 $seconddomain = $s[count($s) - 1].$rootdomain;
                 for ($i = 0; $i < count($s) - 1; $i++)
                     $selfdomain .= $s[$i] . ".";
-		$selfdomain = substr($selfdomain,0,strlen($selfdomain)-1);
-		break;
+                $selfdomain = substr($selfdomain,0,strlen($selfdomain)-1);
+                break;
             }
         }
         //echo $seconddomain ;exit;

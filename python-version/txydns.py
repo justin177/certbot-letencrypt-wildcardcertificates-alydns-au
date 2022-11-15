@@ -151,4 +151,4 @@ if __name__ == '__main__':
         for record in cns.list(domain[1], selfdomain)['data']['records']:
             #print (record['name'],record['id'] )
             result = (cns.delete(domain[1], record['id']))
-	    #print (result["message"])
+        #print (result["message"])

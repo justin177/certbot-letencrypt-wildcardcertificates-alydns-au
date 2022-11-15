@@ -52,65 +52,65 @@ key=""
 token=""
 
 if [[ -z "$paction" ]]; then
-	paction="add"
+    paction="add"
 fi
 
 case $plang in
-	"php")
+    "php")
 
-	cmd=$phpcmd
-	if [[ "$pdns" == "aly" ]]; then
-		dnsapi=$PATH"/php-version/alydns.php"
-		key=$ALY_KEY
-		token=$ALY_TOKEN
-	elif [[ "$pdns" == "txy" ]]; then
-		dnsapi="$PATH/php-version/txydns.php"
-		key=$TXY_KEY
-		token=$TXY_TOKEN
-	elif [[ "$pdns" == "hwy" ]]; then
-		# TODO
-		dnsapi=""
-		key=$HWY_KEY
-		token=$HWY_TOKEN
+    cmd=$phpcmd
+    if [[ "$pdns" == "aly" ]]; then
+        dnsapi=$PATH"/php-version/alydns.php"
+        key=$ALY_KEY
+        token=$ALY_TOKEN
+    elif [[ "$pdns" == "txy" ]]; then
+        dnsapi="$PATH/php-version/txydns.php"
+        key=$TXY_KEY
+        token=$TXY_TOKEN
+    elif [[ "$pdns" == "hwy" ]]; then
+        # TODO
+        dnsapi=""
+        key=$HWY_KEY
+        token=$HWY_TOKEN
     exit 
   elif [[ "$pdns" == "godaddy" ]] ;then 
-		dnsapi="$PATH/php-version/godaddydns.php"
-		key=$GODADDY_KEY
-		token=$GODADDY_TOKEN
-	else
-		echo "Not support this dns services"
-		exit
-	fi
-	;;
+        dnsapi="$PATH/php-version/godaddydns.php"
+        key=$GODADDY_KEY
+        token=$GODADDY_TOKEN
+    else
+        echo "Not support this dns services"
+        exit
+    fi
+    ;;
 
-	"python")
+    "python")
 
-	cmd=$pythoncmd
-	if [[ "$pdns" == "aly" ]]; then
-		dnsapi=$PATH"/python-version/alydns.py"
-		key=$ALY_KEY
-		token=$ALY_TOKEN
+    cmd=$pythoncmd
+    if [[ "$pdns" == "aly" ]]; then
+        dnsapi=$PATH"/python-version/alydns.py"
+        key=$ALY_KEY
+        token=$ALY_TOKEN
     elif [[ "$pdns" == "txy" ]] ;then
         dnsapi=$PATH"/python-version/dnspod.py"
-		key=$TXY_KEY
-		token=$TXY_TOKEN
-	elif [[ "$pdns" == "hwy" ]]; then
-		dnsapi="$PATH/python-version/hwydns.py"
-		key=$HWY_KEY
-		token=$HWY_TOKEN
-	elif [[ "$pdns" == "godaddy" ]] ;then
-		dnsapi=$PATH"/python-version/godaddydns.py"
-		key=$GODADDY_KEY
-		token=$GODADDY_TOKEN
-	elif [[ "$pdns" == "cloudflare" ]] ;then
-		dnsapi=$PATH"/python-version/cloudflare.py"
-		key=$CLOUDFLARE_KEY
-		token=$CLOUDFLARE_TOKEN
-	else 
-		echo "Not support this dns services"
-		exit
-	fi
-	;;
+        key=$TXY_KEY
+        token=$TXY_TOKEN
+    elif [[ "$pdns" == "hwy" ]]; then
+        dnsapi="$PATH/python-version/hwydns.py"
+        key=$HWY_KEY
+        token=$HWY_TOKEN
+    elif [[ "$pdns" == "godaddy" ]] ;then
+        dnsapi=$PATH"/python-version/godaddydns.py"
+        key=$GODADDY_KEY
+        token=$GODADDY_TOKEN
+    elif [[ "$pdns" == "cloudflare" ]] ;then
+        dnsapi=$PATH"/python-version/cloudflare.py"
+        key=$CLOUDFLARE_KEY
+        token=$CLOUDFLARE_TOKEN
+    else 
+        echo "Not support this dns services"
+        exit
+    fi
+    ;;
   
 esac
 
